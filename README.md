@@ -13,6 +13,7 @@ Unofficial docker image for building strapi V4 to use postgresql.
 
 ```shell
 docker-compose build
+docker compose up # 5分ほど時間がかかる
 ```
 
 ### access
