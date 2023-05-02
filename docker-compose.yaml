@@ -4,7 +4,7 @@ services:
     build:
       context: ./docker/strapi/
       args:
-        NODE_VERSION: 16.0.0
+        NODE_VERSION: 16.8.0
         BASE_VERSION: latest
         STRAPI_VERSION: 4.0.3
     environment:
@@ -25,6 +25,26 @@ services:
       - 1337:1337
     depends_on:
       - postgres
+
+  web:
+    build:
+      context: ./docker/web/
+    volumes:
+      - ./web:/srv/web
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - strapi
+    hostname: web
+    networks:
+      - strapi
+    # tty: true
+    # stdin_open: true
+    # privileged: true
+    # entrypoint: /sbin/init
+    platform: linux/x86_64    # ← この設定を追加する
 
   postgres:
     image: postgres
