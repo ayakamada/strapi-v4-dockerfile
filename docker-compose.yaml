@@ -4,7 +4,7 @@ services:
     build:
       context: ./docker/strapi/
       args:
-        NODE_VERSION: 14.17.0
+        NODE_VERSION: 16.0.0
         BASE_VERSION: latest
         STRAPI_VERSION: 4.0.3
     environment:
@@ -36,3 +36,9 @@ services:
       - ./data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+
+networks:
+  strapi:
+    name: Strapi
+    driver: bridge
